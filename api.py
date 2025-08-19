@@ -3,6 +3,7 @@ from pydantic import BaseModel
 from qdrant_client import QdrantClient
 from qdrant_client.http import models
 from sentence_transformers import SentenceTransformer
+import os
 
 # Configurações
 QDRANT_URL = os.getenv("https://b6a242d7-b7d3-427d-ac5d-bceafc69d92f.europe-west3-0.gcp.cloud.qdrant.iohttps://b6a242d7-b7d3-427d-ac5d-bceafc69d92f.europe-west3-0.gcp.cloud.qdrant.io")
@@ -53,6 +54,7 @@ def search(q: str, k: int = 5):
         limit=k
     )
     return [{"id": h.id, "score": h.score, "payload": h.payload} for h in hits]
+
 
 
 
