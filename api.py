@@ -5,8 +5,8 @@ from qdrant_client.http import models
 from sentence_transformers import SentenceTransformer
 
 # Configurações
-QDRANT_URL = "https://b6a242d7-b7d3-427d-ac5d-bceafc69d92f.europe-west3-0.gcp.cloud.qdrant.iohttps://b6a242d7-b7d3-427d-ac5d-bceafc69d92f.europe-west3-0.gcp.cloud.qdrant.io"
-QDRANT_API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.RP87OL8e2FhKWEEIKKUV2MdMdsy83tKz_HyiUOYKH-8"
+QDRANT_URL = os.getenv"https://b6a242d7-b7d3-427d-ac5d-bceafc69d92f.europe-west3-0.gcp.cloud.qdrant.iohttps://b6a242d7-b7d3-427d-ac5d-bceafc69d92f.europe-west3-0.gcp.cloud.qdrant.io"
+QDRANT_API_KEY = os.getenv("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.RP87OL8e2FhKWEEIKKUV2MdMdsy83tKz_HyiUOYKH-8")
 COLLECTION = "historia"
 
 # Inicialização
@@ -53,3 +53,4 @@ def search(q: str, k: int = 5):
         limit=k
     )
     return [{"id": h.id, "score": h.score, "payload": h.payload} for h in hits]
+
