@@ -6,6 +6,8 @@ from pydantic import BaseModel, Field
 from typing import List
 from qdrant_client import QdrantClient
 from qdrant_client.http import models
+from fastapi.openapi.docs import get_redoc_html
+
 
 # -----------------------
 # Config via env vars
@@ -19,7 +21,15 @@ QDRANT_API_KEY = os.getenv("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJ
 COLLECTION = os.getenv("COLLECTION", "historia")
 VECTOR_SIZE = 384  # all-MiniLM-L6-v2
 
-app = FastAPI(title="Memória Externa — Y/S")
+app = FastAPI(title="Memória Externa — Y/S", docs_url=None, redoc_url=None)
+
+@app.get("/docs")
+def custom_docs():
+    return get_redoc_html(
+        openapi_url=app.openapi_url,
+        title="Memória Externa — ReDoc",
+    )
+
 
 # CORS (ajuste allow_origins para seu domínio quando publicar)
 app.add_middleware(
@@ -134,3 +144,4 @@ def search(q: str, k: int = 5):
         ]
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Erro na busca: {e}")
+
