@@ -1,4 +1,7 @@
-﻿fastapi
-uvicorn
-qdrant-client
-sentence-transformers
+﻿fafastapi==0.110.0
+uvicorn[standard]==0.27.1
+qdrant-client==1.9.1
+sentence-transformers==2.7.0
+torch>=2.0.0
+numpy>=1.24.0
+
